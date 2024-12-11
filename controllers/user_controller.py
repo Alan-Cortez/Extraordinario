@@ -9,11 +9,11 @@ user_model = UserModel()
 
 # Configuración de Pusher
 pusher_client = pusher.Pusher(
-  app_id='1767934',
-  key='ffa9ea426828188c22c1',
-  secret='628348e447718a9eec1f',
-  cluster='us2',
-  ssl=True
+    app_id='1767934',
+    key='ffa9ea426828188c22c1',
+    secret='628348e447718a9eec1f',
+    cluster='us2',
+    ssl=True
 )
 
 @user_routes.route("/")
@@ -63,5 +63,11 @@ def usuarios_actualizar(id):
 def usuarios_eliminar(id):
     # Eliminar el usuario de la base de datos
     user_model.eliminar_usuario(id)
+
+    # Emitir un evento de Pusher para notificar la eliminación
+    pusher_client.trigger("registrosTiempoReal", "registroTiempoReal", {
+        "id_usuario": id
+    })
+
     flash("Usuario eliminado exitosamente", "success")
     return redirect(url_for("user_routes.index"))
