@@ -4,6 +4,7 @@ from mysql.connector import Error
 class UserModel:
     def __init__(self):
         try:
+            # Conexión a la base de datos
             self.con = mysql.connector.connect(
                 host="185.232.14.52",
                 database="u760464709_tst_sep",
@@ -17,6 +18,7 @@ class UserModel:
             self.con = None
     
     def verificar_conexion(self):
+        # Verificar si la conexión está activa y, si no, reconectarse
         if not self.con or not self.con.is_connected():
             try:
                 self.con.reconnect(attempts=3, delay=5)
