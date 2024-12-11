@@ -33,10 +33,13 @@ def usuarios_guardar():
         user_model.guardar_usuario(usuario, contrasena)
 
         # Notificar mediante Pusher
-        pusher_client.trigger("registrosTiempoReal", "registroTiempoReal", {
-            "usuario": usuario,
-            "contrasena": contrasena
-        })
+        try:
+            pusher_client.trigger("registrosTiempoReal", "registroTiempoReal", {
+                "usuario": usuario,
+                "contrasena": contrasena
+            })
+        except Exception as e:
+            flash("Hubo un error al enviar la notificación en tiempo real", "error")
 
         flash("Usuario creado exitosamente", "success")
     else:
@@ -65,9 +68,12 @@ def usuarios_eliminar(id):
     user_model.eliminar_usuario(id)
 
     # Emitir un evento de Pusher para notificar la eliminación
-    pusher_client.trigger("registrosTiempoReal", "registroTiempoReal", {
-        "id_usuario": id
-    })
+    try:
+        pusher_client.trigger("registrosTiempoReal", "registroTiempoReal", {
+            "id_usuario": id
+        })
+    except Exception as e:
+        flash("Hubo un error al enviar la notificación en tiempo real", "error")
 
     flash("Usuario eliminado exitosamente", "success")
     return redirect(url_for("user_routes.index"))
