@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for
 from models.user_model import UserModel
 import pusher
 
@@ -77,3 +77,4 @@ def usuarios_eliminar(id):
 
     flash("Usuario eliminado exitosamente", "success")
     return redirect(url_for("user_routes.index"))
+
