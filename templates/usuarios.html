@@ -9,18 +9,13 @@
     <h1>Lista de Usuarios</h1>
     <ul>
         {% for usuario in usuarios %}
-        <li>{{ usuario.usuario }} - {{ usuario.contrasena }}</li>
+        <li>{{ usuario[1] }} - {{ usuario[2] }}</li>
         {% endfor %}
     </ul>
 
-    <h2>Registrar Nuevo Usuario</h2>
     <form action="/usuarios/guardar" method="POST">
-        <div>
-            <input type="text" name="txtUsuarioFA" placeholder="Usuario" required>
-        </div>
-        <div>
-            <input type="password" name="txtContrasenaFA" placeholder="Contraseña" required>
-        </div>
+        <input type="text" name="txtUsuarioFA" placeholder="Usuario" required>
+        <input type="password" name="txtContrasenaFA" placeholder="Contraseña" required>
         <button type="submit">Guardar Usuario</button>
     </form>
 </body>
