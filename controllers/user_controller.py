@@ -9,12 +9,13 @@ user_model = UserModel()
 
 # Configuración de Pusher
 pusher_client = pusher.Pusher(
-    app_id='1767934',
-    key='ffa9ea426828188c22c1',
-    secret='628348e447718a9eec1f',
-    cluster='us2',
-    ssl=True
+  app_id='1767934',
+  key='ffa9ea426828188c22c1',
+  secret='628348e447718a9eec1f',
+  cluster='us2',
+  ssl=True
 )
+
 
 @user_routes.route("/")
 def index():
